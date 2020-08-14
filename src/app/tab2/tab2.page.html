@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Converte
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Converte</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" snapback-duration="1000ms" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+    pullingText="Arraste e solte para atualizar a cotação"
+    refreshingText="Atualizando cotação...">
+  </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item>
+    <ion-label><b>{{ name }}</b> <h4>{{ create_date }}</h4></ion-label>
+    <ion-badge style="font-size: 16px;" color="{{ color }}" slot="end">R$ {{ ask }} </ion-badge>
+   <!-- <ion-badge color="{{ color }}" slot="end">{{ varBid }} </ion-badge> -->
+</ion-item>
+
+<ion-card>
+    <ion-card-header>
+      <ion-card-title>Converter para Real</ion-card-title>
+      <ion-card-subtitle>Digite o Valor em Dolar</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-item>
+      <ion-label>Forma de pagamento</ion-label>
+      <ion-select [(ngModel)]="trType" name="trType" id="trType" multiple="false" interface="action-sheet" placeholder="Selecione">
+        <ion-select-option [value]="item" *ngFor="let item of tipos">{{item.nome}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <ion-input class="box" type="number" id="valUs" placeholder="USD" size=40 style="text-align: left; font-size: 40px;" (ionChange)="onChange()"></ion-input>
+    <ion-input class="box" readonly id="valBr" placeholder ="REAIS" size=40 style="text-align: left; font-size: 40px; "></ion-input>
+    <ion-label id="valImposto"><small>Valor do imposto pago: R$ {{ taxas }}</small></ion-label>
+
+  </ion-card>
+  <div class="ion-padding">
+    <ion-button expand="block" color="primary" type="submit" class="ion-no-margin" (click)="converte()" >Converte</ion-button>
+  </div>
+ <div class="padding-txt"><p><a class="txt-box" href="https://forms.gle/yfY4kFpicVHFo5ACA" target="_blank">O que está achando da versão BETA?<br>Clique e deixe seu feedback</a></p></div>
+ <div class="txt">© georgearaujo.com.br</div>
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];
+a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-114873381-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</ion-content>

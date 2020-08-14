@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Início
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Início</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" snapback-duration="1000ms" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+    pullingText="Arraste e solte para atualizar a cotação"
+    refreshingText="Atualizando cotação...">
+  </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card>
+    <ion-card-subtitle style="margin-top:10px; margin-left:10px;">1 DOLAR VALE...</ion-card-subtitle>
+    <ion-card-title style="margin-top:10px; margin-left: 10px; font-size: 70px;" id="cotacao">R$ {{ ask }}</ion-card-title>
+    <ion-card-subtitle style="margin-left:10px; font-size: 15px;">{{ create_date }}</ion-card-subtitle>
+  <ion-card-content></ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-subtitle style="margin-top:10px; margin-left:10px;">VARIAÇÃO</ion-card-subtitle>
+    <ion-card-subtitle style="margin-left:10px; font-size:9px; ">EM RELAÇÃO A COTAÇÃO ANTERIOR</ion-card-subtitle>
+    <ion-card-title color="{{ color }}" style="margin-top:10px; margin-left:10px; font-size: 41px;" id="cotacao">{{ pctChange }}% <ion-icon name="{{ icon }}"></ion-icon> </ion-card-title>
+  <ion-card-content></ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Dolar {{ sobedesce }}</ion-card-subtitle>
+      <ion-card-title>Noticia Relacionada</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Nova versão no ar, agora com essa nova aba, que mostra em destaque o valor do Dolar e a sua variação em relação a cotação anterior. <BR>Para fazer as conversões clique no ícone do cartão, logo abaixo. 
+    </ion-card-content>
+  </ion-card>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];
+  a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-114873381-1', 'auto');
+    ga('send', 'pageview');
+  
+  </script>
+</ion-content>
