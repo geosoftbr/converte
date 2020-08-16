@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeSwitcherService } from '../theme-switcher.service';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(public themeSwitcher: ThemeSwitcherService) {}
+
+  onChange(){
+    console.log('mudando tema...')
+    this.themeSwitcher.cycleTheme();
+
+  }
 
 }

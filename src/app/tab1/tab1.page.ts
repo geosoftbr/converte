@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx'
 
 import { DolarTurismoService } from '../dolar-turismo.service';
+import { NewsIntroService } from '../news-intro.service';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
+  providers: [
+    NewsIntroService
+  ]
 })
 export class Tab1Page implements OnInit{
 
@@ -33,23 +36,34 @@ export class Tab1Page implements OnInit{
   public refresher;
   public isRefreshing: boolean = false;
   
-    constructor(public dolarTurismo: DolarTurismoService, private alertController: AlertController, private ga: GoogleAnalytics) {}
+    constructor(
+      public dolarTurismo: DolarTurismoService, 
+      private alertController: AlertController, 
+      private NewsIntro: NewsIntroService,
+      
+      ) {
+
+      }
     
     cotacao:string;
   
     ngOnInit() {
      
       this.getDolarTurismo();
-//
-      this.ga.startTrackerWithId('UA-114873381-1', 30)
-     .then(() => {
-      console.log('Google analytics is ready now');
-         //this.ga.trackView('Tab1Page', '', true)
-        this.ga.trackView('test')
-        // Tracker is ready
-        // You can now track pages or set additional information such as AppVersion or UserId
-      })
-      .catch(e => console.log('Error starting GoogleAnalytics', e));
+
+      console.log("indo buscar noticia...")
+
+      this.NewsIntro.getNews().subscribe(
+        data=>{
+          console.log("Tentando...");
+          console.log(data);
+        },error => {
+          console.log("falhando...");
+          console.log(error);
+        }
+        
+
+      )
 
   
     }
@@ -62,8 +76,7 @@ export class Tab1Page implements OnInit{
       },1000);
 
     }
-  
-  
+
     async presentAlert() {
       const alert = await this.alertController.create({
         header: 'Vish!',
@@ -109,6 +122,7 @@ export class Tab1Page implements OnInit{
         }
       );
     }
+    
     
     parseJson(data: Object) {
       {
